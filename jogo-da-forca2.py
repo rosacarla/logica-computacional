@@ -1,17 +1,42 @@
-# 🎯 Jogo da Forca com desenho do boneco
+# 🎯 Jogo da Forca com boneco sendo formado a cada erro
 palavra = "tecnologia"
 letras_descobertas = ["_"] * len(palavra)
 tentativas = 6
 letras_usadas = []
 
-def mostrar_boneco(t):
+def mostrar_boneco(erros):
     bonecos = [
+        "",
         """
          _______
         |       |
-        |       😵
+        |       😀
+        |
+        |
+        |
+        """,
+        """
+         _______
+        |       |
+        |       🙂
+        |       |
+        |
+        |
+        """,
+        """
+         _______
+        |       |
+        |       😕
+        |      /|
+        |
+        |
+        """,
+        """
+         _______
+        |       |
+        |       😐
         |      /|\\
-        |      / \\
+        |
         |
         """,
         """
@@ -25,43 +50,21 @@ def mostrar_boneco(t):
         """
          _______
         |       |
-        |       😐
+        |       😵
         |      /|\\
-        |      
-        |
-        """,
-        """
-         _______
-        |       |
-        |       😕
-        |      /|
-        |      
-        |
-        """,
-        """
-         _______
-        |       |
-        |       🙂
-        |       |
-        |      
-        |
-        """,
-        """
-         _______
-        |       |
-        |       😀
-        |       
-        |      
+        |      / \\
         |
         """
     ]
-    print(bonecos[6 - t])
+    print(bonecos[erros])
 
 print("🎯 Jogo da Forca! Adivinhe a palavra letra por letra.")
 
+erros = 0
+
 while tentativas > 0:
     print("\nPalavra:", " ".join(letras_descobertas))
-    mostrar_boneco(tentativas)
+    mostrar_boneco(erros)
     letra = input("Digite uma letra (ou 'sair' para desistir): ").lower()
 
     if letra == "sair":
@@ -85,6 +88,7 @@ while tentativas > 0:
         print("✅ Boa! Letra correta.")
     else:
         tentativas -= 1
+        erros += 1
         print("❌ Letra errada. Tentativas restantes:", tentativas)
 
     if "_" not in letras_descobertas:
@@ -92,5 +96,5 @@ while tentativas > 0:
         break
 
 if tentativas == 0:
-    mostrar_boneco(tentativas)
+    mostrar_boneco(erros)
     print("\n💀 Fim de jogo! A palavra era:", palavra)
